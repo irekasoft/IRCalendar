@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IRCalendarView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController {
+    
+    BOOL isStartFromSunday;
+    
+}
+
 
 
 @end

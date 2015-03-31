@@ -14,6 +14,8 @@
 		A3636C261AC9381C007D3A32 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3636C251AC9381C007D3A32 /* Images.xcassets */; };
 		A3636C291AC9381C007D3A32 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3636C271AC9381C007D3A32 /* LaunchScreen.xib */; };
 		A3636C351AC9381C007D3A32 /* IRCalendarViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A3636C341AC9381C007D3A32 /* IRCalendarViewTests.m */; };
+		A3636C401AC9399F007D3A32 /* IRCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3636C3F1AC9399F007D3A32 /* IRCalendarView.m */; };
+		A3636C431AC9C91B007D3A32 /* IRCalendarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3636C421AC9C91B007D3A32 /* IRCalendarHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		A3636C2E1AC9381C007D3A32 /* IRCalendarViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRCalendarViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3636C331AC9381C007D3A32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3636C341AC9381C007D3A32 /* IRCalendarViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRCalendarViewTests.m; sourceTree = "<group>"; };
+		A3636C3E1AC9399F007D3A32 /* IRCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRCalendarView.h; sourceTree = "<group>"; };
+		A3636C3F1AC9399F007D3A32 /* IRCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRCalendarView.m; sourceTree = "<group>"; };
+		A3636C411AC9C91B007D3A32 /* IRCalendarHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRCalendarHelper.h; sourceTree = "<group>"; };
+		A3636C421AC9C91B007D3A32 /* IRCalendarHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRCalendarHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,11 +87,15 @@
 		A3636C171AC9381C007D3A32 /* IRCalendarView */ = {
 			isa = PBXGroup;
 			children = (
+				A3636C411AC9C91B007D3A32 /* IRCalendarHelper.h */,
+				A3636C421AC9C91B007D3A32 /* IRCalendarHelper.m */,
 				A3636C1C1AC9381C007D3A32 /* AppDelegate.h */,
 				A3636C1D1AC9381C007D3A32 /* AppDelegate.m */,
 				A3636C1F1AC9381C007D3A32 /* ViewController.h */,
 				A3636C201AC9381C007D3A32 /* ViewController.m */,
 				A3636C221AC9381C007D3A32 /* Main.storyboard */,
+				A3636C3E1AC9399F007D3A32 /* IRCalendarView.h */,
+				A3636C3F1AC9399F007D3A32 /* IRCalendarView.m */,
 				A3636C251AC9381C007D3A32 /* Images.xcassets */,
 				A3636C271AC9381C007D3A32 /* LaunchScreen.xib */,
 				A3636C181AC9381C007D3A32 /* Supporting Files */,
@@ -220,8 +230,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3636C211AC9381C007D3A32 /* ViewController.m in Sources */,
+				A3636C431AC9C91B007D3A32 /* IRCalendarHelper.m in Sources */,
 				A3636C1E1AC9381C007D3A32 /* AppDelegate.m in Sources */,
 				A3636C1B1AC9381C007D3A32 /* main.m in Sources */,
+				A3636C401AC9399F007D3A32 /* IRCalendarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
