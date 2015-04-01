@@ -43,7 +43,8 @@
 
 + (NSString *)stringFromDate:(NSDate*)date withDateFormat:(NSString*)dateFormat{
     
-    NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
+//    NSLocale *locale = [NSLocale autoupdatingCurrentLocale];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setLocale:locale];
     [format setDateFormat:dateFormat];
@@ -230,9 +231,6 @@
 }
 
 //--------
-
-
-
 
 
 

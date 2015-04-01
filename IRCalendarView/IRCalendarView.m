@@ -55,7 +55,6 @@
     [self displayDaysLabel];
 
     
-   
     
 }
 
@@ -79,13 +78,8 @@
     dH = self.bounds.size.height/7.0f;
     min_side = MIN(dW, dH);
     
-    if (self.isStartFromSunday == YES){
-        startWeekOn = DayNameSun;
-    }else {
-        startWeekOn = DayNameMon;
-    }
     
-    NSLog(@" %d", startWeekOn);
+    NSLog(@"label startWeekOn %d", startWeekOn);
     for (int i = 0; i < 7; i ++) {
         
         UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(i* dW, -dH, dW, dH)];
@@ -120,18 +114,18 @@
     self.displayMonth = [IRCALVH intMonthFromDate:date];
     
     [self setupCellForCurrentMonthWithDate:date];
+    
+    [self displayDaysLabel];
     [self setNeedsDisplay];
 }
 
 - (NSInteger)normalizeFirstDay:(NSInteger)firstDay{
     NSInteger retVal;
-    if (firstDay > 0) {
+    if (firstDay >= 0) {
         retVal = firstDay;
     }else{
         switch (firstDay) {
-            case 0:{
-                retVal = 7;
-            }break;
+            
             case -1:{
                 retVal = 6;
             }break;
@@ -175,27 +169,52 @@
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     [outputFormatter setLocale:locale];
     [outputFormatter setDateFormat:@"c"];
+
+    NSDateFormatter *outputFormatter2 = [[NSDateFormatter alloc] init];
+    [outputFormatter2 setLocale:locale];
+    [outputFormatter2 setDateFormat:@"EE"];
+
     
     // firstDay 1 ~ 7 : Monday ~ Sunday
-    // 1   2   3   4   5   6   7
-    // Mon  Tue Wed Thu Fri Sat Sun
+    // 1    2    3    4    5    6    7
+    // Sun  Mon  Tue  Wed  Thu  Fri  Sat
     
     NSInteger firstDay;
     NSInteger dayOnFirstDay = [[outputFormatter stringFromDate:myDate] intValue];
-    NSLog(@"first day is %@ %@",[IRCalendarHelper stringFromDate:myDate withDateFormat:@"e"],[IRCalendarHelper stringFromDate:myDate withDateFormat:@"EE"]);
+    NSLog(@"first day is %d %@",[[outputFormatter stringFromDate:myDate] intValue],[outputFormatter2 stringFromDate:myDate]);
     
-    if (self.isStartFromSunday == YES){
-        
-        firstDay = dayOnFirstDay-1;
-        startWeekOn = DayNameSun;
+    // legacy format
+    if (self.isStartFromSunday) {
+        if (self.isStartFromSunday == YES){
+            
+            startWeekOn = DayNameSun;
+            
+        }else if (self.isStartFromSunday == NO){
+            
+            startWeekOn = DayNameMon;
+        }
 
-    }else if (self.isStartFromSunday == NO){
-        firstDay = dayOnFirstDay-2;
-        startWeekOn = DayNameMon;
     }
 
+    // start exec
+    if (startWeekOn == DayNameSun){
+        firstDay = dayOnFirstDay-1;
+    }else if (startWeekOn == DayNameMon){
+        firstDay = dayOnFirstDay-2;
+    }else if (startWeekOn == DayNameTue){
+        firstDay = dayOnFirstDay-3;
+    }else if (startWeekOn == DayNameWed){
+        firstDay = dayOnFirstDay-4;
+    }else if (startWeekOn == DayNameThu){
+        firstDay = dayOnFirstDay-5;
+    }else if (startWeekOn == DayNameFri){
+        firstDay = dayOnFirstDay-6;
+    }else if (startWeekOn == DayNameSat){
+        firstDay = dayOnFirstDay-7;
+    }
     firstDay = [self normalizeFirstDay:firstDay];
     
+    NSLog(@"first day normalized %ld", firstDay);
     
     // get how many days in a calendar
     NSRange rangeForDay = [gregorian rangeOfUnit:NSCalendarUnitDay
@@ -246,29 +265,29 @@
     }
     _isStartFromSunday = isStartFromSunday;
     
-    [self setupCellForCurrentMonthWithDate:self.date];
+    [self displayDaysLabel];
+    
     
     [self setNeedsDisplay];
-    [self displayDaysLabel];
+    
     
 }
 
-- (void)setStartDay:(enum DayName)startDay{
+- (void)setStartWeekOn:(enum DayName)startWeekOn_{
     
-    startWeekOn = startDay;
     
-    if (startDay == DayNameSun) {
-        
-        _isStartFromSunday = YES;
-        
-    }else if (startDay == DayNameMon){
-        _isStartFromSunday = NO;
-    }
+    startWeekOn = startWeekOn_;
     
-    [self setNeedsDisplay];
+    _isStartFromSunday = NO;
+    
     [self displayDaysLabel];
+    [self setupCellForCurrentMonthWithDate:self.date];
+    [self setNeedsDisplay];
+   
     
 }
+
+
 
 #pragma mark - drawrect
 
@@ -317,7 +336,7 @@
                 
                 //// Oval Drawing
                 UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(col*dW + (dW - box_min_side)/2, row*dH , box_min_side , box_min_side)];
-                [UIColor.grayColor setFill];
+                [[UIColor redColor] setFill];
                 [ovalPath fill];
                 
                 CGFloat outerMargin = 0.0f;
@@ -481,6 +500,8 @@
     
     NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
     [outputFormatter setDateFormat:@"EE"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    [outputFormatter setLocale:locale];
     NSString *newDateString = [outputFormatter stringFromDate:date];
     
     //	return [newDateString substringToIndex:1];

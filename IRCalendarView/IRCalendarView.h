@@ -66,6 +66,7 @@ enum DayName {
     
 }
 
+@property (assign, nonatomic) enum DayName startWeekOn;
 @property (assign, nonatomic) enum DayName startDay;
 @property (strong, nonatomic) NSDate *todayDate;
 

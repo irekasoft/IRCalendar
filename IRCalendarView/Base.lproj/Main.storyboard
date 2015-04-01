@@ -14,18 +14,28 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Voh-3j-gdP">
-                                <rect key="frame" x="16" y="508" width="30" height="30"/>
+                                <rect key="frame" x="86" y="469" width="30" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="&lt;">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tgh-Q8-Nwm">
-                                <rect key="frame" x="16" y="631" width="343" height="29"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maP-bi-slA">
+                                <rect key="frame" x="41" y="380" width="105" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title="Today">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="today:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rp5-Nt-xIK"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tgh-Q8-Nwm">
+                                <rect key="frame" x="129" y="732" width="766" height="29"/>
                                 <segments>
                                     <segment title="Su"/>
                                     <segment title="Mo"/>
@@ -40,21 +50,18 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lqs-ox-ift">
-                                <rect key="frame" x="554" y="508" width="30" height="30"/>
+                                <rect key="frame" x="70" y="454" width="30" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="&gt;">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="reJ-0K-pFG" customClass="IRCalendarView">
-                                <rect key="frame" x="0.0" y="49" width="600" height="245"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="reJ-0K-pFG" customClass="IRCalendarView">
+                                <rect key="frame" x="-9" y="49" width="600" height="261"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="347" id="n5R-n2-lkE"/>
-                                </constraints>
                             </view>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="q5n-6V-4s6">
-                                <rect key="frame" x="88" y="331" width="375" height="162"/>
+                                <rect key="frame" x="216" y="352" width="375" height="162"/>
                                 <date key="date" timeIntervalSinceReferenceDate="449516412.85741401">
                                     <!--2015-03-31 17:40:12 +0000-->
                                 </date>
@@ -62,52 +69,58 @@
                                     <action selector="changeDate:" destination="BYZ-38-t0r" eventType="valueChanged" id="0Gd-tM-deG"/>
                                 </connections>
                             </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zt1-qo-vBX">
-                                <rect key="frame" x="26" y="302" width="548" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ban-fY-Roj">
+                                <rect key="frame" x="216" y="323" width="375" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ujd-sE-FQe">
+                                <rect key="frame" x="349" y="530" width="51" height="31"/>
+                                <connections>
+                                    <action selector="changeStartFromSunday:" destination="BYZ-38-t0r" eventType="valueChanged" id="bfS-bo-hDQ"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="startFromSunday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CyJ-k1-P3h">
+                                <rect key="frame" x="208" y="530" width="133" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zt1-qo-vBX">
+                                <rect key="frame" x="0.0" y="0.0" width="58" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maP-bi-slA">
-                                <rect key="frame" x="248" y="501" width="105" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="OQb-7S-njn"/>
-                                    <constraint firstAttribute="width" constant="105" id="lU7-he-hr6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <state key="normal" title="Today">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="today:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rp5-Nt-xIK"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="Zt1-qo-vBX" secondAttribute="centerX" id="4vZ-OH-Bjj"/>
-                            <constraint firstItem="Zt1-qo-vBX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="KJD-ob-yqR"/>
-                            <constraint firstAttribute="centerX" secondItem="maP-bi-slA" secondAttribute="centerX" id="O7O-cJ-nuA"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Zt1-qo-vBX" secondAttribute="trailing" constant="10" id="XZv-u6-pKc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="reJ-0K-pFG" secondAttribute="trailing" constant="-16" id="Xwm-sY-xLD"/>
-                            <constraint firstItem="reJ-0K-pFG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="ldT-Ig-RWI"/>
-                            <constraint firstItem="reJ-0K-pFG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="29" id="nJ9-OA-mWm"/>
-                            <constraint firstItem="Zt1-qo-vBX" firstAttribute="top" secondItem="reJ-0K-pFG" secondAttribute="bottom" constant="8" id="qi8-fY-0Sq"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="tgh-Q8-Nwm" secondAttribute="bottom" constant="8" id="Kro-m3-u4e"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tgh-Q8-Nwm" secondAttribute="trailing" constant="113" id="VTW-b0-22d"/>
+                            <constraint firstItem="tgh-Q8-Nwm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="113" id="j55-mP-CvX"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Zt1-qo-vBX"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="4vZ-OH-Bjj"/>
                             </mask>
                         </variation>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="calendarView" destination="reJ-0K-pFG" id="Nr6-6H-DCD"/>
-                        <outlet property="lbl_date" destination="Zt1-qo-vBX" id="TLv-m6-9hp"/>
+                        <outlet property="datePicker" destination="q5n-6V-4s6" id="7iE-3K-PGA"/>
+                        <outlet property="lbl_date" destination="Ban-fY-Roj" id="Wtq-my-fu1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-8" y="613"/>
+            <point key="canvasLocation" x="-288" y="548"/>
         </scene>
     </scenes>
 </document>

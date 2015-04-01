@@ -11,6 +11,7 @@
 @interface ViewController ()
 
 
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet IRCalendarView *calendarView;
 
 @end
@@ -21,16 +22,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    self.lbl_date.text = [IRCalendarHelper stringFromDate:[NSDate date] withDateFormat:@"MMMM yyyy"];
     [self test];
 }
 
 
 - (void)viewWillLayoutSubviews{
+    self.calendarView.date = self.datePicker.date;
     [super viewWillLayoutSubviews];
-    self.calendarView.date = [NSDate date];
     [self.calendarView setNeedsDisplay];
-    self.calendarView.isStartFromSunday = YES;
-
 }
 
 - (void)test{
@@ -55,7 +55,7 @@
             
             int day = [[IRCalendarHelper stringFromDate:now withDateFormat:@"c"] intValue];
             
-//            NSLog(@"day %d",day);
+            NSLog(@"day %d",day);
         }
         
         
@@ -76,25 +76,25 @@
     
     switch (sender.selectedSegmentIndex) {
         case 0:
-             self.calendarView.isStartFromSunday = YES;
+            self.calendarView.isStartFromSunday = YES;
             break;
         case 1:
              self.calendarView.isStartFromSunday = NO;
             break;
         case 2:
-            self.calendarView.startDay = DayNameTue;
+            self.calendarView.startWeekOn = DayNameTue;
             break;
         case 3:
-            self.calendarView.startDay = DayNameWed;
+            self.calendarView.startWeekOn = DayNameWed;
             break;
         case 4:
-            self.calendarView.startDay = DayNameThu;
+            self.calendarView.startWeekOn = DayNameThu;
             break;
         case 5:
-            self.calendarView.startDay = DayNameFri;
+            self.calendarView.startWeekOn = DayNameFri;
             break;
         case 6:
-            self.calendarView.startDay = DayNameSat;
+            self.calendarView.startWeekOn = DayNameSat;
             break;
             
         default:
@@ -108,8 +108,17 @@
     
     self.calendarView.date = sender.date;
     
-    self.lbl_date.text = [IRCalendarHelper stringFromDate:sender.date withDateFormat:@"MM yyyy"];
+    self.lbl_date.text = [IRCalendarHelper stringFromDate:sender.date withDateFormat:@"MMMM yyyy"];
     
+}
+- (IBAction)changeStartFromSunday:(UISwitch *)sender {
+    if (sender.isOn == YES) {
+        self.calendarView.isStartFromSunday = YES;
+
+    }else{
+        self.calendarView.isStartFromSunday = NO;
+
+    }
 }
 
 @end
