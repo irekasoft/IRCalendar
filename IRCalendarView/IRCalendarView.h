@@ -31,8 +31,8 @@ enum DayName {
 
 @interface IRCalendarView : UIView {
 
-    enum DayName aStartDay;
-    
+
+    enum DayName startWeekOn;
     // calendar view bounds
     
     int cell[6][7];

@@ -16,6 +16,7 @@
 		A3636C351AC9381C007D3A32 /* IRCalendarViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A3636C341AC9381C007D3A32 /* IRCalendarViewTests.m */; };
 		A3636C401AC9399F007D3A32 /* IRCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3636C3F1AC9399F007D3A32 /* IRCalendarView.m */; };
 		A3636C431AC9C91B007D3A32 /* IRCalendarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3636C421AC9C91B007D3A32 /* IRCalendarHelper.m */; };
+		A373D0AB1ACCA00800F51239 /* ReadMe.md in Sources */ = {isa = PBXBuildFile; fileRef = A373D0AA1ACCA00800F51239 /* ReadMe.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		A3636C3F1AC9399F007D3A32 /* IRCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRCalendarView.m; sourceTree = "<group>"; };
 		A3636C411AC9C91B007D3A32 /* IRCalendarHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRCalendarHelper.h; sourceTree = "<group>"; };
 		A3636C421AC9C91B007D3A32 /* IRCalendarHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRCalendarHelper.m; sourceTree = "<group>"; };
+		A373D0AA1ACCA00800F51239 /* ReadMe.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
+		A3CBF9EE1ACAE46300780E9C /* Calendar.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Calendar.playground; path = IRCalendarView/Calendar.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +72,8 @@
 		A3636C0C1AC9381C007D3A32 = {
 			isa = PBXGroup;
 			children = (
+				A373D0AA1ACCA00800F51239 /* ReadMe.md */,
+				A3CBF9EE1ACAE46300780E9C /* Calendar.playground */,
 				A3636C171AC9381C007D3A32 /* IRCalendarView */,
 				A3636C311AC9381C007D3A32 /* IRCalendarViewTests */,
 				A3636C161AC9381C007D3A32 /* Products */,
@@ -231,6 +236,7 @@
 			files = (
 				A3636C211AC9381C007D3A32 /* ViewController.m in Sources */,
 				A3636C431AC9C91B007D3A32 /* IRCalendarHelper.m in Sources */,
+				A373D0AB1ACCA00800F51239 /* ReadMe.md in Sources */,
 				A3636C1E1AC9381C007D3A32 /* AppDelegate.m in Sources */,
 				A3636C1B1AC9381C007D3A32 /* main.m in Sources */,
 				A3636C401AC9399F007D3A32 /* IRCalendarView.m in Sources */,
@@ -358,6 +364,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = IRCalendarView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -368,6 +375,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = IRCalendarView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -426,6 +434,7 @@
 				A3636C3A1AC9381C007D3A32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A3636C3B1AC9381C007D3A32 /* Build configuration list for PBXNativeTarget "IRCalendarViewTests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +443,7 @@
 				A3636C3D1AC9381C007D3A32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

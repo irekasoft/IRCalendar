@@ -20,7 +20,47 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [self test];
+}
+
+
+- (void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
     self.calendarView.date = [NSDate date];
+    [self.calendarView setNeedsDisplay];
+    self.calendarView.isStartFromSunday = YES;
+
+}
+
+- (void)test{
+    
+    // monday case
+    for (int i = 2010; i <= 2015; i++) {
+        
+        for (int j = 1; j <= 12; j++) {
+            NSDate *now = [IRCalendarHelper dateWithDay:1 month:j year:i];
+            
+            // Formatter configuration
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+            [formatter setLocale:posix];
+            [formatter setDateFormat:@"dd MM yyyy - EE c"];
+            [formatter setDateFormat:@"dd MM yyyy - EE c ->"];
+
+            // Date to string
+            
+            NSString *prettyDate = [formatter stringFromDate:now];
+//            NSLog(@"prettyDate %@", prettyDate);
+            
+            int day = [[IRCalendarHelper stringFromDate:now withDateFormat:@"c"] intValue];
+            
+//            NSLog(@"day %d",day);
+        }
+        
+        
+    }
+    
     
 }
 
@@ -62,6 +102,13 @@
     }
     
    
+    
+}
+- (IBAction)changeDate:(UIDatePicker*)sender {
+    
+    self.calendarView.date = sender.date;
+    
+    self.lbl_date.text = [IRCalendarHelper stringFromDate:sender.date withDateFormat:@"MM yyyy"];
     
 }
 

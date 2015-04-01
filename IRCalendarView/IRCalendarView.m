@@ -36,6 +36,9 @@
 
 - (void)setup{
     
+    // for demo
+    self.isStartFromSunday = YES;
+    
     self.backgroundColor = [UIColor clearColor];
     
     self.todayDate = [IRCALVH dateForDayFromDate:[NSDate date]];
@@ -50,68 +53,20 @@
     [self addSubview:calendarDetailView];
     
     [self displayDaysLabel];
-    //[self test];
+
     
-    // We want to make a custom NSDate
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setDay:-7];
-    
-    NSDate *now = [NSDate date];
-    
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDate *date = [gregorian dateByAddingComponents:components toDate:now options:0];
-    
-    // Formatter configuration
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-    [formatter setLocale:posix];
-    [formatter setDateFormat:@"dd MM yyyy - e c"];
-    // Date to string
-    
-    NSString *prettyDate = [formatter stringFromDate:date];
-    NSLog(@"prettyDate %@", prettyDate);
+   
     
 }
 
-- (void)test{
 
-    for (int i = 2010; i <= 2015; i++) {
-        
-        for (int j = 1; j <= 12; j++) {
-            NSDate *now = [IRCalendarHelper dateWithDay:1 month:j year:i];
-            
-            // Formatter configuration
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-            [formatter setLocale:posix];
-            [formatter setDateFormat:@"dd MM yyyy - e c"];
-            // Date to string
-            
-            NSString *prettyDate = [formatter stringFromDate:now];
-            NSLog(@"prettyDate %@", prettyDate);
-        }
-        
-        
-    }
-    
-    
-}
 
 - (void)displayDaysLabel{
     
-    phoneOffsetX = 0;
-    phoneOffsetY = 0;
-    monthLabelYOffset = -150;
-    todayBoxHeight = 30;
-    todayBoxOffset = 2;
     //-----------------------------------
     // put day "S M T W T F S"
     //-----------------------------------
-    if (IS_IPHONE) {
-        fontSize = 18;
-    }else{
-        fontSize = 24;
-    }
+    fontSize = 20;
     
     for (UIView *view in self.subviews) {
         if ([view isKindOfClass:[UILabel class]] && view.tag == DAY_LABEL_TAG) {
@@ -124,15 +79,20 @@
     dH = self.bounds.size.height/7.0f;
     min_side = MIN(dW, dH);
     
-    //NSLog(@" %f %f", dW, dH);
-    CGFloat labelHeight = 20;
-    for (int i = 0; i < 7.0; i ++) {
+    if (self.isStartFromSunday == YES){
+        startWeekOn = DayNameSun;
+    }else {
+        startWeekOn = DayNameMon;
+    }
+    
+    NSLog(@" %d", startWeekOn);
+    for (int i = 0; i < 7; i ++) {
         
-        UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(i* dW, -labelHeight, dW, labelHeight)];
+        UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(i* dW, -dH, dW, dH)];
         dayLabel.textAlignment = NSTextAlignmentCenter;
         dayLabel.backgroundColor = [UIColor clearColor];
 
-        dayLabel.text = [[self getShortDayName:i from:aStartDay] substringToIndex:3];
+        dayLabel.text = [[self getShortDayName:i from:startWeekOn] substringToIndex:3];
         dayLabel.tag = DAY_LABEL_TAG;
         dayLabel.textColor = [UIColor whiteColor];
         [self addSubview:dayLabel];
@@ -140,9 +100,9 @@
         [dayLabel setFont:[UIFont systemFontOfSize:fontSize]];
         
         // red color on sunday
-        if (aStartDay == DayNameSun){
+        if (startWeekOn == DayNameSun){
             if (i == 0) dayLabel.textColor = [UIColor redColor];
-        }else if (aStartDay == DayNameMon){
+        }else if (startWeekOn == DayNameMon){
             if (i == 6) dayLabel.textColor = [UIColor redColor];
         }
         
@@ -156,13 +116,48 @@
     nextMonthDay = 0;
     _date = date;
     
-    
     self.displayYear = [IRCALVH intYearFromDate:date];
     self.displayMonth = [IRCALVH intMonthFromDate:date];
     
     [self setupCellForCurrentMonthWithDate:date];
     [self setNeedsDisplay];
 }
+
+- (NSInteger)normalizeFirstDay:(NSInteger)firstDay{
+    NSInteger retVal;
+    if (firstDay > 0) {
+        retVal = firstDay;
+    }else{
+        switch (firstDay) {
+            case 0:{
+                retVal = 7;
+            }break;
+            case -1:{
+                retVal = 6;
+            }break;
+            case -2:{
+                retVal = 5;
+            }break;
+            case -3:{
+                retVal = 4;
+            }break;
+            case -4:{
+                retVal = 3;
+            }break;
+            case -5:{
+                retVal = 2;
+            }break;
+            case -6:{
+                retVal = 1;
+            }break;
+
+            default:
+                break;
+        }
+    }
+    return retVal;
+}
+
 
 - (void)setupCellForCurrentMonthWithDate:(NSDate *)date{
     
@@ -185,19 +180,22 @@
     // 1   2   3   4   5   6   7
     // Mon  Tue Wed Thu Fri Sat Sun
     
-    if (self.startDay){
+    NSInteger firstDay;
+    NSInteger dayOnFirstDay = [[outputFormatter stringFromDate:myDate] intValue];
+    NSLog(@"first day is %@ %@",[IRCalendarHelper stringFromDate:myDate withDateFormat:@"e"],[IRCalendarHelper stringFromDate:myDate withDateFormat:@"EE"]);
+    
+    if (self.isStartFromSunday == YES){
         
-        aStartDay = self.startDay;
-        
+        firstDay = dayOnFirstDay-1;
+        startWeekOn = DayNameSun;
+
+    }else if (self.isStartFromSunday == NO){
+        firstDay = dayOnFirstDay-2;
+        startWeekOn = DayNameMon;
     }
+
+    firstDay = [self normalizeFirstDay:firstDay];
     
-    // This algorithm to create a calendar
-    //
-    // get the first day. mon ~ friday
-    NSInteger firstDay = [[outputFormatter stringFromDate:myDate] intValue] - aStartDay;
-    
-    NSLog(@"first day is %d",firstDay);
-    if (firstDay < 0 ) firstDay = DayNameFri;
     
     // get how many days in a calendar
     NSRange rangeForDay = [gregorian rangeOfUnit:NSCalendarUnitDay
@@ -242,11 +240,14 @@
 - (void)setIsStartFromSunday:(BOOL)isStartFromSunday{
     
     if (isStartFromSunday) {
-        aStartDay = DayNameSun;
+        startWeekOn = DayNameSun;
     }else{
-        aStartDay = DayNameMon;
+        startWeekOn = DayNameMon;
     }
     _isStartFromSunday = isStartFromSunday;
+    
+    [self setupCellForCurrentMonthWithDate:self.date];
+    
     [self setNeedsDisplay];
     [self displayDaysLabel];
     
@@ -254,7 +255,7 @@
 
 - (void)setStartDay:(enum DayName)startDay{
     
-    aStartDay = startDay;
+    startWeekOn = startDay;
     
     if (startDay == DayNameSun) {
         
@@ -276,7 +277,6 @@
 - (void)drawRect:(CGRect)rect {
     
     NSLog(@"startfromsunday %d",self.isStartFromSunday);
-    //  currentDate.isDayStartOnSun = [DEFAULTS boolForKey:[Define getSwitchNameWithNumber:kSwitchCalendarStartFromSunday]];
     
     // refresh subview when setNeedDisplay
     if ([[calendarDetailView subviews] lastObject]) {
@@ -292,6 +292,42 @@
         
         for (int col = 0; col < 7; col++){
             
+            NSString *dayString = [NSString stringWithFormat:@"%d",cell[row][col]];
+            if ([dayString intValue] == 0) {
+                dayString = @"";
+            }
+            
+            //NSLog(@" current %d, %d %d",[dayString intValue], self.currentMonth, self.currentYear);
+            // current day, current month, and current year
+            if (([dayString intValue] == self.currentDay) &&
+                self.displayMonth == self.currentMonth &&
+                self.displayYear == self.currentYear) {
+                
+                NSLog(@"matched");
+                
+                //dateTile.backgroundColor = [UIColor whiteColor];
+                dayNumberLabel.textColor = [UIColor whiteColor];
+                
+                CGColorRef blackColor = [UIColor redColor].CGColor;
+                CGContextSetFillColorWithColor(context, blackColor);
+                CGRect dateHighlighterRect;
+                
+                
+                CGFloat box_min_side = MIN(dW, dH);
+                
+                //// Oval Drawing
+                UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(col*dW + (dW - box_min_side)/2, row*dH , box_min_side , box_min_side)];
+                [UIColor.grayColor setFill];
+                [ovalPath fill];
+                
+                CGFloat outerMargin = 0.0f;
+                CGRect outerRect = CGRectInset(dateHighlighterRect, outerMargin, outerMargin);
+                CGMutablePathRef outerPath = createRoundedRectForRect(outerRect, 5);
+                CGContextAddPath(context, outerPath);
+                CGContextFillPath(context);
+                
+            }
+            
             //// Text Drawing
             CGRect textRect = CGRectMake(col* dW, row* dH, box_side, dH);
             UIBezierPath* textPath = [UIBezierPath bezierPathWithRect: textRect];
@@ -299,10 +335,7 @@
             textPath.lineWidth = 1;
             [textPath stroke];
             {
-                NSString *dayString = [NSString stringWithFormat:@"'%d'",cell[row][col]];
-//                if ([dayString intValue] == 0) {
-//                    dayString = @"";
-//                }
+                
                 
                 NSString* textContent = dayString;
                 
@@ -316,12 +349,13 @@
                 CGContextClipToRect(context, textRect);
                 [textContent drawInRect: CGRectMake(CGRectGetMinX(textRect), CGRectGetMinY(textRect) + (CGRectGetHeight(textRect) - textTextHeight) / 2, CGRectGetWidth(textRect), textTextHeight) withAttributes: textFontAttributes];
                 CGContextRestoreGState(context);
+                
             }
             
             dayNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(col* dW, row* dH , 45, 45)];
             dayNumberLabel.textAlignment = NSTextAlignmentCenter;
             
-            NSString *dayString = [NSString stringWithFormat:@"%d",cell[row][col]];
+            dayString = [NSString stringWithFormat:@"%d",cell[row][col]];
             if ([dayString intValue] == 0) {
                 dayString = @"";
             }
@@ -425,44 +459,7 @@
             }
             
             
-            //NSLog(@" current %d, %d %d",[dayString intValue], self.currentMonth, self.currentYear);
-            // current day, current month, and current year
-            if (([dayString intValue] == self.currentDay) &&
-                self.displayMonth == self.currentMonth &&
-                self.displayYear == self.currentYear){
-                
-                NSLog(@"matched");
-                
-                //dateTile.backgroundColor = [UIColor whiteColor];
-                dayNumberLabel.textColor = [UIColor whiteColor];
-                
-                CGColorRef blackColor = [UIColor redColor].CGColor;
-                CGContextSetFillColorWithColor(context, blackColor);
-                CGRect dateHighlighterRect;
-                
-                
-                
-                if (IS_IPHONE) {
-                    // TODO: need to change to perfect box
-                    //dateHighlighterRect = CGRectMake(j* dW  , i* dH , todayBoxHeight, todayBoxHeight);
-                    
-                    dateHighlighterRect = CGRectMake(col* dW + dW/4 , row* dH + dH/4, todayBoxHeight, todayBoxHeight);
-                    
-                }else {
-                    dateHighlighterRect = CGRectMake(col* dW , row* dH , todayBoxHeight+ dW/4 , todayBoxHeight+ dH/4);
-                }
-                
-                
-                //CGContextFillRect(context, dateHighlighter);
-                
-                
-                CGFloat outerMargin = 0.0f;
-                CGRect outerRect = CGRectInset(dateHighlighterRect, outerMargin, outerMargin);
-                CGMutablePathRef outerPath = createRoundedRectForRect(outerRect, 15);
-                CGContextAddPath(context, outerPath);
-                CGContextFillPath(context);
-                
-            }
+            
             
             
         }

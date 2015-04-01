@@ -15,6 +15,7 @@
     
 }
 
+@property (weak, nonatomic) IBOutlet UILabel *lbl_date;
 
 
 @end

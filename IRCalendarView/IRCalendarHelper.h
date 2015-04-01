@@ -8,8 +8,6 @@
 //  IRCalendarHelper V0.1
 
 #import <Foundation/Foundation.h>
-#define DAY_IN_SECONDS 86400
-#define WEEK_IN_SECONDS 604800
 
 @interface IRCalendarHelper : NSObject
 
@@ -28,5 +26,6 @@
 + (NSDate *) dateForDayFromDate:(NSDate *)date;
 
 + (NSString *)getShortDayName:(int)number;
-+ (NSString *)getShortDayName:(int)number from:(enum DayName)startDay;
++ (NSDate *)dateFromString:(NSString *)string withFormat:(NSString *)format;
+
 @end
