@@ -186,14 +186,10 @@
     // legacy format
     if (self.isStartFromSunday) {
         if (self.isStartFromSunday == YES){
-            
             startWeekOn = DayNameSun;
-            
         }else if (self.isStartFromSunday == NO){
-            
             startWeekOn = DayNameMon;
         }
-
     }
 
     // start exec
@@ -500,7 +496,8 @@
     
     NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
     [outputFormatter setDateFormat:@"EE"];
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ms"];
+    locale = [NSLocale currentLocale];
     [outputFormatter setLocale:locale];
     NSString *newDateString = [outputFormatter stringFromDate:date];
     

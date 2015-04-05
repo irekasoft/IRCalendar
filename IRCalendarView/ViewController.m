@@ -24,6 +24,33 @@
     
     self.lbl_date.text = [IRCalendarHelper stringFromDate:[NSDate date] withDateFormat:@"MMMM yyyy"];
     [self test];
+    
+    
+    
+    NSLocale *locale = [NSLocale currentLocale];
+    
+    NSString *language = [locale displayNameForKey:NSLocaleIdentifier
+                                             value:[locale localeIdentifier]];
+    
+    
+    
+    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+    [outputFormatter setDateFormat:@"MMMM"];
+    locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ms"];
+    [outputFormatter setLocale:locale];
+    
+    NSLog(@"dateFormatter %@",[outputFormatter stringFromDate:[IRCalendarHelper dateWithDay:1 month:1 year:2015]]);
+    
+    
+    
+    
+    
+}
+
+- (void)hello{
+
+    
+    
 }
 
 
@@ -43,19 +70,21 @@
             
             // Formatter configuration
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            
+//            NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"ms"];
             NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
             [formatter setLocale:posix];
-            [formatter setDateFormat:@"dd MM yyyy - EE c"];
-            [formatter setDateFormat:@"dd MM yyyy - EE c ->"];
+            [formatter setDateFormat:@"dd MM yyyy - MMMM EE c"];
+            [formatter setDateFormat:@"dd MM yyyy - MMMM EE c ->"];
 
             // Date to string
             
             NSString *prettyDate = [formatter stringFromDate:now];
 //            NSLog(@"prettyDate %@", prettyDate);
             
-            int day = [[IRCalendarHelper stringFromDate:now withDateFormat:@"c"] intValue];
+            int day = [[IRCalendarHelper stringFromDate:now withDateFormat:@"dd MMMM "] intValue];
             
-            NSLog(@"day %d",day);
+            NSLog(@"day %@",prettyDate);
         }
         
         

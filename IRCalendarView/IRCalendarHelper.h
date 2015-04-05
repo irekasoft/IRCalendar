@@ -28,4 +28,6 @@
 + (NSString *)getShortDayName:(int)number;
 + (NSDate *)dateFromString:(NSString *)string withFormat:(NSString *)format;
 
++ (NSString *)stringFromDate:(NSDate*)date withDateFormat:(NSString*)dateFormat withLocaleID:(NSString *)localeID;
+
 @end

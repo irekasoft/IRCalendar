@@ -232,6 +232,17 @@
 
 //--------
 
-
++ (NSString *)stringFromDate:(NSDate*)date withDateFormat:(NSString*)dateFormat withLocaleID:(NSString *)localeID{
+    
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:localeID];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setLocale:locale];
+    [format setDateFormat:dateFormat];
+    
+    // get time
+    return [NSString stringWithFormat:@"%@",
+            [format stringFromDate:date]];
+    
+}
 
 @end
