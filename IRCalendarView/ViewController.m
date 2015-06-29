@@ -71,11 +71,11 @@
             // Formatter configuration
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             
-//            NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"ms"];
-            NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-            [formatter setLocale:posix];
+//            NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ms"]; // hari 1 adalah isnin
+            NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]; // hari 1 adalah sunday
+            [formatter setLocale:locale];
             [formatter setDateFormat:@"dd MM yyyy - MMMM EE c"];
-            [formatter setDateFormat:@"dd MM yyyy - MMMM EE c ->"];
+
 
             // Date to string
             
@@ -105,10 +105,10 @@
     
     switch (sender.selectedSegmentIndex) {
         case 0:
-            self.calendarView.isStartFromSunday = YES;
+            self.calendarView.startWeekOn = DayNameSun;
             break;
         case 1:
-             self.calendarView.isStartFromSunday = NO;
+            self.calendarView.startWeekOn = DayNameMon;
             break;
         case 2:
             self.calendarView.startWeekOn = DayNameTue;

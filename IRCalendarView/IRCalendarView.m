@@ -21,6 +21,8 @@
 
 @implementation IRCalendarView
 
+@synthesize startWeekOn;
+
 - (id)initWithFrame:(CGRect)frame {
     if((self = [super initWithFrame:frame])) {
         [self setup];
@@ -54,8 +56,6 @@
     
     [self displayDaysLabel];
 
-    
-    
 }
 
 
